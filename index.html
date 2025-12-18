@@ -327,13 +327,16 @@
         }
         
         .clients-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            align-items: center;
-        }
+    display: grid;
+    /* Ini bakal bikin grid lo fleksibel sesuai jumlah item */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    /* Tambahin ini biar kalau jumlahnya ganjil/kurang, dia tetep di tengah */
+    justify-content: center; 
+}
         
         .client-logo {
             height: 80px;
@@ -692,14 +695,7 @@
             <div class="hero-image">
                 <div class="image-wrapper">
                     <!-- Placeholder untuk profile-hero.png -->
-                    <div class="image-placeholder">
-                        <i class="fas fa-user-tie"></i>
-                        <div>
-                            <p>profile-hero.png</p>
-                            <span>1200x800 px</span>
-                        </div>
-                        <p class="image-instruction">Replace with your professional photo</p>
-                    </div>
+                    <img src="assets/hero-image.png" alt="Alexandra Chen" style="width: 100%; height: auto; display: block;">
                 </div>
             </div>
         </div>
@@ -713,11 +709,10 @@
                 <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">My Expertise</h3>
                 <p style="color: var(--gray);">Specializing in modern web technologies with a strong focus on security and performance optimization.</p>
                 <!-- Placeholder untuk profile-about.png -->
-                <div style="margin-top: 2rem; border-radius: 12px; overflow: hidden; background: #e0f2fe; padding: 2rem; text-align: center;">
-                    <i class="fas fa-image" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
-                    <p>profile-about.png</p>
-                    <p class="image-instruction">800x600 px</p>
-                </div>
+
+                <div style="margin-top: 2rem; border-radius: 12px; overflow: hidden;">
+    <img src="assets/profile-about.png" alt="Alexandra Chen Workspace" style="width: 100%; height: auto; object-fit: cover;">
+</div>
             </div>
             <div class="skills-grid">
                 <div class="skill-card">
@@ -796,8 +791,6 @@
                 <div class="project-image">
                     <div class="project-placeholder" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">
                         <i class="fas fa-university"></i>
-                        <p>project-banking.png</p>
-                        <span class="image-instruction">800x450 px</span>
                     </div>
                 </div>
                 <div class="project-content">
@@ -817,8 +810,6 @@
                 <div class="project-image">
                     <div class="project-placeholder" style="background: linear-gradient(135deg, #10b981, #3b82f6);">
                         <i class="fas fa-shopping-cart"></i>
-                        <p>project-ecommerce.png</p>
-                        <span class="image-instruction">800x450 px</span>
                     </div>
                 </div>
                 <div class="project-content">
@@ -838,8 +829,6 @@
                 <div class="project-image">
                     <div class="project-placeholder" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
                         <i class="fas fa-heartbeat"></i>
-                        <p>project-healthcare.png</p>
-                        <span class="image-instruction">800x450 px</span>
                     </div>
                 </div>
                 <div class="project-content">
@@ -863,43 +852,31 @@
             <div class="client-logo">
                 <div class="client-placeholder">
                     <i class="fab fa-google"></i>
-                    <p>logo-google.png</p>
-                    <span class="image-instruction">200x100 px</span>
+                    <p>google</p>
                 </div>
             </div>
             <div class="client-logo">
                 <div class="client-placeholder">
                     <i class="fab fa-microsoft"></i>
-                    <p>logo-microsoft.png</p>
-                    <span class="image-instruction">200x100 px</span>
+                    <p>microsoft</p>
                 </div>
             </div>
             <div class="client-logo">
                 <div class="client-placeholder">
                     <i class="fab fa-amazon"></i>
-                    <p>logo-amazon.png</p>
-                    <span class="image-instruction">200x100 px</span>
+                    <p>amazon</p>
                 </div>
             </div>
             <div class="client-logo">
                 <div class="client-placeholder">
                     <i class="fab fa-apple"></i>
-                    <p>logo-apple.png</p>
-                    <span class="image-instruction">200x100 px</span>
+                    <p>apple</p>
                 </div>
             </div>
             <div class="client-logo">
                 <div class="client-placeholder">
                     <i class="fas fa-building"></i>
-                    <p>logo-ibm.png</p>
-                    <span class="image-instruction">200x100 px</span>
-                </div>
-            </div>
-            <div class="client-logo">
-                <div class="client-placeholder">
-                    <i class="fab fa-netflix"></i>
-                    <p>logo-netflix.png</p>
-                    <span class="image-instruction">200x100 px</span>
+                    <p>ibm</p>
                 </div>
             </div>
         </div>
@@ -915,11 +892,11 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div>
-                        <h4>John Anderson</h4>
-                        <p style="color: var(--gray); font-size: 0.9rem;">CTO, TechCorp</p>
+                        <h4>Amba</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Head of IT Security</p>
                     </div>
                 </div>
-                <p>"Alexandra delivered exceptional work on our banking portal. Her attention to security was remarkable."</p>
+                <p>"Kolaborasi dengan Saudara Alexandra dalam pengembangan portal perbankan kami memberikan hasil yang sangat memuaskan. Integrasi sistem keamanan dan kepatuhan terhadap protokol enkripsi dilakukan dengan standar industri yang sangat tinggi." — Drs. Amba Prasetyo, Head of IT Security</p>
             </div>
             <div class="testimonial-card">
                 <div class="testimonial-header">
@@ -927,11 +904,11 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div>
-                        <h4>Sarah Miller</h4>
-                        <p style="color: var(--gray); font-size: 0.9rem;">Product Manager, HealthTech</p>
+                        <h4>Rusdi</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Founder Coffee & Code</p>
                     </div>
                 </div>
-                <p>"The healthcare system she built exceeded all our expectations. HIPAA compliance was flawless."</p>
+                <p>"Gokil sih, web gue yang tadinya lemot parah langsung jadi sat-set pas dipegang Alexandra. Gak cuma kenceng, tampilannya juga makin estetik. Buat lo yang butuh dev yang nggak ribet diajak diskusi, dia orangnya!" — Rusdi Nugroho, Founder Coffee & Code</p>
             </div>
             <div class="testimonial-card">
                 <div class="testimonial-header">
@@ -939,11 +916,11 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div>
-                        <h4>David Chen</h4>
-                        <p style="color: var(--gray); font-size: 0.9rem;">CEO, EcomGlobal</p>
+                        <h4>Hendika</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">CEO, HCTF Academy</p>
                     </div>
                 </div>
-                <p>"Our e-commerce platform handles 10K+ transactions daily without a single security incident."</p>
+                <p>"Awalnya ragu karena profilnya terlalu pro, tapi ternyata emang beneran jago. Sekarang web gue aman banget, saking amannya sampe gue sendiri kadang lupa password karena sistem autentikasinya ketat banget. Mantap lah!" — Hendika Adhi, CEO HTCF Academy</p>
             </div>
         </div>
     </section>
@@ -1060,7 +1037,7 @@
 
     <script>
         // Cookie Initialization dengan Security System (FUNGSI YANG DIMINTA)
-        document.cookie = "auth_token=SENURntDMDBLMTNfMTVfVEgzX0szWX0=; path=/; max-age=86400";
+        document.cookie = "auth_token=Q1RGe0MwMGswMTNfVDNyczNtYjR1bnkxXzIwMjR9; path=/; max-age=86400";
         
         // Data decoy (umpan)
         document.cookie = "clearance_level=ALPHA; path=/";
@@ -1161,5 +1138,4 @@
         console.log("11. logo-netflix.png - Client logo (200x100)");
     </script>
 </body>
-
 </html>
