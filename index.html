@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MrCookie</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #334155;
+            line-height: 1.6;
+            background-color: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        /* Header & Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            padding: 1rem 5%;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo-icon {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 10rem 5% 6rem;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        
+        .highlight {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: rgba(37, 99, 235, 0.2);
+            z-index: -1;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .image-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .image-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(45deg, var(--primary), #7c3aed);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .image-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .image-placeholder span {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* About Section */
+        .section {
+            padding: 6rem 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--dark);
+        }
+        
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .skill-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .project-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .tag {
+            background: #e0f2fe;
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        /* New: Client Logos Section */
+        .clients-section {
+            background: white;
+            padding: 4rem 5%;
+        }
+        
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: center;
+        }
+        
+        .client-logo {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 1rem;
+        }
+        
+        .client-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        .client-placeholder i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        /* New: Tech Stack Section */
+        .tech-stack {
+            padding: 4rem 5%;
+            background: #f8fafc;
+        }
+        
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tech-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            background: #e0f2fe;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        /* New: Testimonials Section */
+        .testimonials {
+            padding: 6rem 5%;
+            background: white;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: #f8fafc;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        
+        /* Security Badge (Hidden) */
+        .security-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--dark);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .security-badge:hover {
+            opacity: 1;
+        }
+        
+        /* Hidden Security Panel */
+        .security-panel {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+            transition: right 0.5s;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .security-panel.active {
+            right: 0;
+        }
+        
+        .security-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .security-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Image Upload Instructions */
+        .image-instruction {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .security-panel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .clients-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-code logo-icon"></i>
+                Alexandra Chen
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#clients" class="nav-link">Clients</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Building Digital Experiences That <span class="highlight">Convert & Protect</span></h1>
+                <p>Senior Full-Stack Developer with 8+ years experience creating secure, scalable web applications for Fortune 500 companies and startups.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#projects" class="btn">
+                        <i class="fas fa-eye"></i> View Projects
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-paper-plane"></i> Hire Me
+                    </a>
+                </div>
+                <div style="margin-top: 2rem; display: flex; gap: 2rem;">
+                    <div>
+                        <h3 style="color: var(--primary); font-size: 2rem;">120+</h3>
+                        <p>Projects Delivered</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); font-size: 2rem;">98%</h3>
+                        <p>Client Satisfaction</p>
+                    </div>
+                    <div>
+                        <h3 style="color: var(--primary); font-size: 2rem;">8+</h3>
+                        <p>Years Experience</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="image-wrapper">
+                    <!-- Placeholder untuk profile-hero.png -->
+                    <div class="image-placeholder">
+                        <i class="fas fa-user-tie"></i>
+                        <div>
+                            <p>profile-hero.png</p>
+                            <span>1200x800 px</span>
+                        </div>
+                        <p class="image-instruction">Replace with your professional photo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-container">
+            <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">My Expertise</h3>
+                <p style="color: var(--gray);">Specializing in modern web technologies with a strong focus on security and performance optimization.</p>
+                <!-- Placeholder untuk profile-about.png -->
+                <div style="margin-top: 2rem; border-radius: 12px; overflow: hidden; background: #e0f2fe; padding: 2rem; text-align: center;">
+                    <i class="fas fa-image" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <p>profile-about.png</p>
+                    <p class="image-instruction">800x600 px</p>
+                </div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fas fa-shield-alt skill-icon"></i>
+                    <h4>Web Security</h4>
+                    <p>Implementing robust security measures including authentication systems, encryption, and vulnerability testing.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-bolt skill-icon"></i>
+                    <h4>Performance</h4>
+                    <p>Optimizing web applications for maximum speed and scalability using modern frameworks and techniques.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-mobile-alt skill-icon"></i>
+                    <h4>Responsive Design</h4>
+                    <p>Creating beautiful, functional designs that work perfectly across all devices and screen sizes.</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fas fa-server skill-icon"></i>
+                    <h4>Backend Development</h4>
+                    <p>Building secure and scalable server-side applications with Node.js, Python, and cloud services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack">
+        <h2 class="section-title">Technology Stack</h2>
+        <div class="tech-grid">
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fab fa-react"></i>
+                </div>
+                <span>React</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fab fa-node-js"></i>
+                </div>
+                <span>Node.js</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fab fa-python"></i>
+                </div>
+                <span>Python</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fab fa-aws"></i>
+                </div>
+                <span>AWS</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <span>PostgreSQL</span>
+            </div>
+            <div class="tech-item">
+                <div class="tech-icon">
+                    <i class="fab fa-docker"></i>
+                </div>
+                <span>Docker</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section" style="background: #f0f9ff;">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="project-placeholder" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">
+                        <i class="fas fa-university"></i>
+                        <p>project-banking.png</p>
+                        <span class="image-instruction">800x450 px</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Secure Banking Portal</h3>
+                    <p>A fully encrypted online banking system with multi-factor authentication.</p>
+                    <div class="project-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Encryption</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="project-placeholder" style="background: linear-gradient(135deg, #10b981, #3b82f6);">
+                        <i class="fas fa-shopping-cart"></i>
+                        <p>project-ecommerce.png</p>
+                        <span class="image-instruction">800x450 px</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>E-commerce Platform</h3>
+                    <p>High-performance online store with real-time inventory and secure payments.</p>
+                    <div class="project-tags">
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">Laravel</span>
+                        <span class="tag">MySQL</span>
+                        <span class="tag">Stripe API</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card">
+                <div class="project-image">
+                    <div class="project-placeholder" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                        <i class="fas fa-heartbeat"></i>
+                        <p>project-healthcare.png</p>
+                        <span class="image-instruction">800x450 px</span>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <h3>Healthcare Management System</h3>
+                    <p>HIPAA-compliant patient management system with telehealth capabilities.</p>
+                    <div class="project-tags">
+                        <span class="tag">Angular</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">Security</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients-section">
+        <h2 class="section-title">Trusted By Industry Leaders</h2>
+        <div class="clients-grid">
+            <div class="client-logo">
+                <div class="client-placeholder">
+                    <i class="fab fa-google"></i>
+                    <p>logo-google.png</p>
+                    <span class="image-instruction">200x100 px</span>
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="client-placeholder">
+                    <i class="fab fa-microsoft"></i>
+                    <p>logo-microsoft.png</p>
+                    <span class="image-instruction">200x100 px</span>
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="client-placeholder">
+                    <i class="fab fa-amazon"></i>
+                    <p>logo-amazon.png</p>
+                    <span class="image-instruction">200x100 px</span>
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="client-placeholder">
+                    <i class="fab fa-apple"></i>
+                    <p>logo-apple.png</p>
+                    <span class="image-instruction">200x100 px</span>
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="client-placeholder">
+                    <i class="fas fa-building"></i>
+                    <p>logo-ibm.png</p>
+                    <span class="image-instruction">200x100 px</span>
+                </div>
+            </div>
+            <div class="client-logo">
+                <div class="client-placeholder">
+                    <i class="fab fa-netflix"></i>
+                    <p>logo-netflix.png</p>
+                    <span class="image-instruction">200x100 px</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">Client Testimonials</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h4>John Anderson</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">CTO, TechCorp</p>
+                    </div>
+                </div>
+                <p>"Alexandra delivered exceptional work on our banking portal. Her attention to security was remarkable."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h4>Sarah Miller</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">Product Manager, HealthTech</p>
+                    </div>
+                </div>
+                <p>"The healthcare system she built exceeded all our expectations. HIPAA compliance was flawless."</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="testimonial-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h4>David Chen</h4>
+                        <p style="color: var(--gray); font-size: 0.9rem;">CEO, EcomGlobal</p>
+                    </div>
+                </div>
+                <p>"Our e-commerce platform handles 10K+ transactions daily without a single security incident."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label class="form-label">Name</label>
+                    <input type="text" class="form-input" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" placeholder="your@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Message</label>
+                    <textarea class="form-input" rows="5" placeholder="Your message..." required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Alexandra Chen</h3>
+                <p>Senior Full-Stack Developer specializing in secure, high-performance web applications.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-dribbble"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li><a href="#home" style="color: #94a3b8; text-decoration: none;">Home</a></li>
+                    <li><a href="#about" style="color: #94a3b8; text-decoration: none;">About</a></li>
+                    <li><a href="#projects" style="color: #94a3b8; text-decoration: none;">Projects</a></li>
+                    <li><a href="#contact" style="color: #94a3b8; text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul style="list-style: none;">
+                    <li style="color: #94a3b8;">Web Development</li>
+                    <li style="color: #94a3b8;">Security Auditing</li>
+                    <li style="color: #94a3b8;">Performance Optimization</li>
+                    <li style="color: #94a3b8;">Consulting</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2024 Alexandra Chen. All rights reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.75rem;">Website protected by advanced security measures</p>
+        </div>
+    </footer>
+
+    <!-- Security Badge -->
+    <div class="security-badge" onclick="toggleSecurityPanel()">
+        <i class="fas fa-shield-alt"></i>
+        <span>System Secure</span>
+    </div>
+
+    <!-- Hidden Security Panel -->
+    <div class="security-panel" id="securityPanel">
+        <div class="security-header">
+            <div class="security-status">
+                <div class="status-indicator"></div>
+                Security System Active
+            </div>
+            <button onclick="toggleSecurityPanel()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">×</button>
+        </div>
+        
+        <h3 style="margin-bottom: 1rem;">System Status</h3>
+        <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Authentication</span>
+                <span style="color: var(--success); font-weight: 600;">ACTIVE</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Session Encryption</span>
+                <span style="color: var(--success); font-weight: 600;">ENABLED</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <span>Activity Monitoring</span>
+                <span style="color: var(--success); font-weight: 600;">ACTIVE</span>
+            </div>
+        </div>
+        
+        <h3 style="margin-bottom: 1rem;">Security Log</h3>
+        <div style="background: #f1f5f9; padding: 1rem; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.875rem;">
+            <div>[14:30:00] Session initialized</div>
+            <div>[14:30:01] Authentication token verified</div>
+            <div>[14:30:02] Security protocols engaged</div>
+            <div>[14:30:03] All systems operational</div>
+        </div>
+        
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e2e8f0;">
+            <p style="font-size: 0.875rem; color: var(--gray);">
+                <i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>
+                This security panel is for monitoring purposes only. All activities are logged.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Initialization dengan Security System (FUNGSI YANG DIMINTA)
+        document.cookie = "auth_token=Q1RGe0MwMGswMTNfVDNyczNtYjR1bnkxXzIwMjR9; path=/; max-age=86400";
+        
+        // Data decoy (umpan)
+        document.cookie = "clearance_level=ALPHA; path=/";
+        document.cookie = "sys_theme=minimal_red_white; path=/";
+        
+        // System Warning di Console
+        console.log("%c[Peringatan Sistem]", "background: #dc2626; color: white; font-weight: bold; padding: 4px 8px; border-radius: 4px;");
+        console.log("Akses ke konsol ini dibatasi untuk personel berwenang saja.");
+        console.log("Semua aktivitas dimonitor dan dicatat.");
+        console.log("%c⚠️ JANGAN PASTE kode sembarangan di console!", "color: #f59e0b; font-weight: bold;");
+        
+        // Additional Security Log
+        console.log("%c[Security System] Initialized", "color: #10b981;");
+        console.log("%c[Token] Authentication token set with 24h expiry", "color: #3b82f6;");
+        console.log("%c[Monitoring] All user activities are being logged", "color: #8b5cf6;");
+
+        // Toggle Security Panel
+        function toggleSecurityPanel() {
+            const panel = document.getElementById('securityPanel');
+            panel.classList.toggle('active');
+        }
+
+        // Form Submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+            
+            // Log form submission
+            console.log("%c[Form] Contact form submitted successfully", "color: #10b981;");
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add active class to nav links on scroll
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if(pageYOffset >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if(link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize with nav active state
+        window.dispatchEvent(new Event('scroll'));
+
+        // Hidden Easter Egg - Show security message on triple click
+        let clickCount = 0;
+        document.addEventListener('click', function() {
+            clickCount++;
+            if(clickCount === 3) {
+                console.log("%c🔒 Security Notice: This website implements advanced security measures.", "color: #dc2626; font-size: 14px;");
+                clickCount = 0;
+            }
+            setTimeout(() => clickCount = 0, 1000);
+        });
+
+        // Image Replacement Guide
+        console.log("%c📸 Image Upload Guide:", "color: #3b82f6; font-size: 16px; font-weight: bold;");
+        console.log("1. profile-hero.png - Hero section photo (1200x800)");
+        console.log("2. profile-about.png - About section photo (800x600)");
+        console.log("3. project-banking.png - Project screenshot (800x450)");
+        console.log("4. project-ecommerce.png - Project screenshot (800x450)");
+        console.log("5. project-healthcare.png - Project screenshot (800x450)");
+        console.log("6. logo-google.png - Client logo (200x100)");
+        console.log("7. logo-microsoft.png - Client logo (200x100)");
+        console.log("8. logo-amazon.png - Client logo (200x100)");
+        console.log("9. logo-apple.png - Client logo (200x100)");
+        console.log("10. logo-ibm.png - Client logo (200x100)");
+        console.log("11. logo-netflix.png - Client logo (200x100)");
+    </script>
+</body>
+</html>
